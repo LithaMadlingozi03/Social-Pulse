@@ -1,67 +1,121 @@
-# Social Pulse — Portfolio Edition
+# Social-Pulse
 
-A refreshed social-networking portfolio project built with PHP 8+, MySQL/MariaDB, HTML, and CSS. This edition replaces URL-based identity with server-side sessions, stores password hashes, uses prepared SQL statements, validates image uploads, and includes responsive layouts.
+Social-Pulse is a PHP and MySQL social media web application built as a portfolio project. Users can create accounts, share image posts, interact with other users, and explore content.
 
 ## Features
 
-- Registration and sign-in using `password_hash()` / `password_verify()`
-- Session-based authentication and logout
-- Responsive feed showing your posts and posts from accounts you follow
+- User registration, login, and logout
+- User profiles with profile information and avatars
 - Image posts with captions
-- Explore/search people
-- Follow and unfollow accounts
-- Profile pages, bio and avatar editing
 - Likes and comments
-- CSRF tokens on state-changing forms
-- Prepared statements and output escaping
+- Follow and unfollow functionality
+- Explore and user search
+- Light and dark themes
+- Database-backed storage for users and interactions
+- Upload validation and protected pages for logged-out users
+
+## Technologies
+
+- PHP
+- MySQL / MariaDB
+- HTML
+- CSS
+- JavaScript
+- XAMPP for local development
 
 ## Requirements
 
-- XAMPP with PHP 8.1+ and MySQL/MariaDB
-- PHP extensions `mysqli` and `fileinfo`
-- A modern browser
+- XAMPP or another PHP and MySQL/MariaDB environment
+- A web browser
+- Git, if cloning the repository
 
-## Install on XAMPP
+## Installation
 
-1. Copy the `SocialPulse-Portfolio` folder into `C:\xampp\htdocs\`.
-2. Start **Apache** and **MySQL** from the XAMPP Control Panel.
-3. Open phpMyAdmin at `http://localhost/phpmyadmin`.
-4. Import `socialpulse_db.sql`. The script creates and selects the `socialpulse_db` database and creates the required tables.
-5. Open `connect.php`. The defaults are host `127.0.0.1`, user `root`, blank password, database `socialpulse_db`. Change these values if your local MySQL setup differs. For non-local deployments, configure the `SOCIALPULSE_DB_HOST`, `SOCIALPULSE_DB_USER`, `SOCIALPULSE_DB_PASS`, and `SOCIALPULSE_DB_NAME` environment variables instead of committing secrets.
-6. Visit `http://localhost/SocialPulse-Portfolio/` and create an account.
+### 1. Download the project
 
-## Uploads
+Clone the repository:
 
-Post images and avatars are saved under `uploads/`. The application accepts JPG, PNG, WEBP and GIF images up to 8 MB. Ensure the PHP process can write to the uploads folder. The included `.htaccess` blocks script execution in uploads on Apache; keep equivalent protections if deploying elsewhere.
+```bash
+git clone https://github.com/LithaMadlingozi03/Social-Pulse.git
+```
 
-## Database note
+Place the project inside your web server's document root. For XAMPP on Windows, this is normally:
 
-This edition uses a clean schema in `socialpulse_db.sql`. The original 2024 database used usernames as relationship keys and stored passwords in plain text. This version intentionally does **not** import those accounts or reuse their passwords. Register a new local test account. If you want to migrate the old sample data later, create a separate migration that maps old usernames to new numeric user IDs and forces password resets; never convert old plain-text passwords into production credentials.
+```text
+C:\xampp\htdocs\
+```
 
-## Portfolio / deployment checklist
+### 2. Start the services
 
-Before deploying publicly:
+Open the XAMPP Control Panel and start **Apache** and **MySQL**.
 
-- Use HTTPS and secure session cookies.
-- Use a dedicated database user with only required privileges (not MySQL root).
-- Add rate limiting and email verification to registration/login.
-- Add moderation/reporting, privacy controls, and account deletion.
-- Consider image resizing, EXIF stripping, and storage outside the web root.
-- Add automated tests and a deployment-specific configuration.
-- Review the license/rights for any demo images. Do not publish other people's images without permission.
+### 3. Create the database
+
+Open phpMyAdmin:
+
+```text
+http://localhost/phpmyadmin/
+```
+
+Create a new database named:
+
+```text
+socialpulse_db
+```
+
+Select the database and import `database/schema.sql` first.
+
+To populate a new, empty database with fictional demo users and content, import `database/demo_data.sql` after the schema.
+
+**Important:** The demo data file is intended for a fresh database. Do not import it repeatedly or into a database that already contains users and posts, because its IDs may conflict with existing records.
+
+### 4. Configure the database connection
+
+Configure the application's database connection using your local MySQL settings. Keep local credentials in your local configuration file or environment variables.
+
+Do not commit passwords, secret keys, private configuration files, or real user data to GitHub.
+
+### 5. Open the application
+
+If the project folder is named `Social-Pulse`, visit:
+
+```text
+http://localhost/Social-Pulse/
+```
+
+If you use a different folder name, replace `Social-Pulse` in the URL with that name.
+
+## Demo account
+
+For the prepared demo dataset, the example login is:
+
+- **Username:** `maya.codes`
+- **Password:** `DemoPass123!`
+
+This account is available only after the demo data has been imported successfully. These are fictional portfolio-demo credentials.
 
 ## Project structure
 
-- `app.php` — sessions, common helpers, CSRF, uploads, layout
-- `connect.php` — database connection
-- `index.php`, `register.php`, `logout.php` — authentication
-- `feed.php`, `explore.php`, `profile.php`, `edit-profile.php` — main pages
-- `post.php`, `like.php`, `follow.php` — post and relationship actions
-- `assets/css/app.css` — responsive UI
-- `assets/js/app.js` — small client-side enhancements
-- `socialpulse_db.sql` — schema
+```text
+Social-Pulse/
+├── database/
+│   ├── schema.sql
+│   └── demo_data.sql
+├── uploads/
+├── README.md
+└── [application PHP, CSS, JavaScript and configuration files]
+```
 
+The exact project structure may vary depending on the files included in the repository.
 
-## Interface themes
+## Security and privacy
 
-Social Pulse uses a soft lavender-and-plum color palette and includes a light/dark mode switch in the top navigation. The selected theme is stored in the current browser using local storage, so it is remembered on later visits on that same browser. No account or database setting is needed.
+- Use fictional data for demonstrations.
+- Keep local configuration and database credentials out of version control.
+- Do not publish real user information or private uploaded images.
+- Use a secure, unique password for any deployed environment.
+- Review file upload validation and access controls before deploying publicly.
+
+## Status
+
+Social-Pulse is a portfolio project intended to demonstrate PHP, database integration, user authentication, and social media application features.

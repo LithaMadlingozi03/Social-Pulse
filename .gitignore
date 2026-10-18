@@ -6,6 +6,7 @@ config.local.php
 
 # User-uploaded content: keep the upload protection rules, not demo users' files
 /uploads/*
+!/uploads/demo-post-*.jpg
 !/uploads/.htaccess
 !/uploads/.gitkeep
 
@@ -21,6 +22,8 @@ Desktop.ini
 
 *.sql
 *.sql.gz
+!database/schema.sql
+!database/demo_data.sql
 
 #Private configuration
 config.local.php
