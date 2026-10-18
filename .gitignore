@@ -1,0 +1,28 @@
+# Local environment/configuration files
+.env
+.env.*
+!.env.example
+config.local.php
+
+# User-uploaded content: keep the upload protection rules, not demo users' files
+/uploads/*
+!/uploads/.htaccess
+!/uploads/.gitkeep
+
+# Logs and operating-system files
+*.log
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor / IDE folders
+.vscode/
+.idea/
+
+*.sql
+*.sql.gz
+
+#Private configuration
+config.local.php
+config.local..php
+config.local.example.php

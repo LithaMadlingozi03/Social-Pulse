@@ -1,0 +1,4 @@
+Options -Indexes
+<FilesMatch "^(connect\.php|app\.php|socialpulse_db\.sql|README\.md|config\.local\.php|config\.local\.example\.php)$">
+  Require all denied
+</FilesMatch>
